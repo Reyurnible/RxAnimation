@@ -13,7 +13,7 @@ public final class RxAnimation {
 
     @CheckResult
     @NonNull
-    public static Observable<AnimationEvent> animationEvents(@NonNull Animation animation) {
+    public static Observable<AnimationEvent> events(@NonNull Animation animation) {
         return Observable.create(new AnimationEventOnSubscribe(animation));
     }
 }
