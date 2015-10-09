@@ -1,4 +1,4 @@
-package com.hosaka.rxanimation;
+package com.hosaka.rxanimation.animation;
 
 import android.view.animation.Animation;
 

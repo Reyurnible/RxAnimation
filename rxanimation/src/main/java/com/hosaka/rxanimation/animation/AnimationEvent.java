@@ -1,10 +1,8 @@
-package com.hosaka.rxanimation;
+package com.hosaka.rxanimation.animation;
 
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.view.animation.Animation;
-
-import java.util.Objects;
 
 /**
  * Created by shunhosaka on 15/10/08.
