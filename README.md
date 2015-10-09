@@ -3,6 +3,10 @@ This is Animation wrapping Observable.
 You can get event Observable.
 And you can call animation chain more simple.
 
+## Offer
+- rx-animation
+- rx-animation-kotlin
+
 ## Classes
 - RxAnimation
 - AnimationEvent
@@ -10,7 +14,7 @@ And you can call animation chain more simple.
 
 ## Example
 
-```
+```Java
 Animation animation = new ScaleAnimation(0.0f, 0.0f, 1.0f, 1.0f);
 RxAnimation.events(animation)
     .subscribe(new Subscriber<AnimationEvent>() {
