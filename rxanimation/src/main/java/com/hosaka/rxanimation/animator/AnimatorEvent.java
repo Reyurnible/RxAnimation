@@ -52,12 +52,11 @@ public class AnimatorEvent {
     }
 
     @Override public String toString() {
-        return "AnimationEvent{animation="
+        return "AnimatorEvent{animation="
                 + animation()
                 + ", kind="
                 + kind()
                 + "}";
     }
-
 
 }
