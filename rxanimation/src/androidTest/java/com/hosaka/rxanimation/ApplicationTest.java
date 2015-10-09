@@ -1,5 +1,7 @@
 package com.hosaka.rxanimation;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
