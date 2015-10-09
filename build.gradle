@@ -30,6 +30,9 @@ ext {
     compileSdkVersion = 23
     buildToolsVersion = '23.0.1'
 
+    kotlinPlugin = 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.14.451'
+    kotlinStdlib = 'org.jetbrains.kotlin:kotlin-stdlib:0.14.451'
+
     supportAnnotations = 'com.android.support:support-annotations:23.0.1'
     supportV4 = 'com.android.support:support-v4:23.0.1'
     supportAppCompat = 'com.android.support:appcompat-v7:23.0.1'
