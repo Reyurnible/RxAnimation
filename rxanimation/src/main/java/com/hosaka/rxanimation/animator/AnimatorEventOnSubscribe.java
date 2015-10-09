@@ -19,34 +19,29 @@ final class AnimatorEventOnSubscribe implements Observable.OnSubscribe<AnimatorE
         this.animation = animation;
     }
 
-    @Override
-    public void call(final Subscriber<? super AnimatorEvent> subscriber) {
+    @Override public void call(final Subscriber<? super AnimatorEvent> subscriber) {
         checkUiThread();
 
         final Animator.AnimatorListener listener = new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
+            @Override public void onAnimationStart(Animator animation) {
                 if (!subscriber.isUnsubscribed()) {
                     subscriber.onNext(AnimatorEvent.create(animation, AnimatorEvent.Kind.START));
                 }
             }
 
-            @Override
-            public void onAnimationEnd(Animator animation) {
+            @Override public void onAnimationEnd(Animator animation) {
                 if (!subscriber.isUnsubscribed()) {
                     subscriber.onNext(AnimatorEvent.create(animation, AnimatorEvent.Kind.END));
                 }
             }
 
-            @Override
-            public void onAnimationCancel(Animator animation) {
+            @Override public void onAnimationCancel(Animator animation) {
                 if (!subscriber.isUnsubscribed()) {
                     subscriber.onNext(AnimatorEvent.create(animation, AnimatorEvent.Kind.CANCEL));
                 }
             }
 
-            @Override
-            public void onAnimationRepeat(Animator animation) {
+            @Override public void onAnimationRepeat(Animator animation) {
                 if (!subscriber.isUnsubscribed()) {
                     subscriber.onNext(AnimatorEvent.create(animation, AnimatorEvent.Kind.REPEAT));
                 }

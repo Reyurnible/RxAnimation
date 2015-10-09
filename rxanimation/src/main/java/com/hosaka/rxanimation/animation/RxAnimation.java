@@ -11,8 +11,7 @@ import rx.Observable;
  */
 public final class RxAnimation {
 
-    @CheckResult
-    @NonNull
+    @CheckResult @NonNull
     public static Observable<AnimationEvent> events(@NonNull Animation animation) {
         return Observable.create(new AnimationEventOnSubscribe(animation));
     }
