@@ -1,1 +1,1 @@
-include ':rxanimation', ':rxanimation-kotlin'
+include ':rxanimation', ':rxanimation-kotlin', ':sample'
