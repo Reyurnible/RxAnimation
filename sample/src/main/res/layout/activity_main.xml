@@ -11,6 +11,7 @@
     tools:context="com.hosshan.android.sample.MainActivity">
 
     <TextView
+        android:id="@+id/main_textview_hellow"
         android:text="Hello World!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
