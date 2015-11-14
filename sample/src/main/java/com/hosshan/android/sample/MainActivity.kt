@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startAnimations() {
+        formLayout.visibility = View.VISIBLE
         mailEditText.visibility = View.INVISIBLE
         passEditText.visibility = View.INVISIBLE
         signupTextView.visibility = View.INVISIBLE
@@ -44,34 +45,25 @@ class MainActivity : AppCompatActivity() {
         alphaAnimation.duration = 3000
         val alphaAnimationObserver = alphaAnimation.bindView(formLayout).map {
             Log.d(MainActivity::class.java.simpleName, it.toString())
-            when (it.kind()) {
-                AnimationEvent.Kind.START -> {
-                    formLayout.visibility = View.VISIBLE
-                    false
-                }
-                AnimationEvent.Kind.REPEAT -> false
-
-                AnimationEvent.Kind.END -> true
-            }
+            it.kind() == AnimationEvent.Kind.END
         }
 
         val translationAnimator: ObjectAnimator = ObjectAnimator.ofFloat(formLayout, "translationY", -1000f, 0f);
         translationAnimator.setDuration(3000);
         val translateAnimatorObserver = translationAnimator.events().map {
             Log.d(MainActivity::class.java.simpleName, it.toString())
-            when (it.kind()) {
-                AnimatorEvent.Kind.START -> false
-                AnimatorEvent.Kind.REPEAT -> false
-                AnimatorEvent.Kind.CANCEL -> false
-                AnimatorEvent.Kind.END -> true
-            }
+            it.kind() == AnimatorEvent.Kind.END
         }
 
         Observable.combineLatest(translateAnimatorObserver, alphaAnimationObserver, { t1, t2 ->
+            Log.d(MainActivity::class.java.simpleName, "T1:" + t1.toString())
+            Log.d(MainActivity::class.java.simpleName, "T2:" + t2.toString())
             t1.and(t2)
-        }).subscribe { validate ->
+        }).filter { it }.subscribe { validate ->
             // post event
             Log.d(MainActivity::class.java.simpleName, "End All Animation")
+            mailEditText.visibility = View.VISIBLE
+            passEditText.visibility = View.VISIBLE
             signupTextView.visibility = View.VISIBLE
             forgotTextView.visibility = View.VISIBLE
         }
