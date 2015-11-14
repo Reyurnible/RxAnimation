@@ -48,11 +48,16 @@ android {
     }
 }
 
+afterEvaluate{
+    tasks.findByPath(":rxanimation-kotlin:mavenAndroidJavadocs").enabled = false
+}
+
 publish {
-    userOrg = USER_NAME
-    groupId = GORUP_ID
+    userOrg = BINTRAY_USER
+    groupId = 'com.github.reyurnible.rxanimation-kotlin'
+    uploadName = 'RxAnimationKotlin'
     artifactId = 'rxanimation-kotlin'
     publishVersion = VERSION_NAME
-    desc = 'Android observable animation binding kotlin extention.'
+    description = 'Android observable animation binding kotlin extention.'
     website = rootProject.ext.siteUrl
 }
