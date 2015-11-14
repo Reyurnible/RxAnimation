@@ -34,7 +34,11 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
+    // Kotlin
     compile rootProject.ext.kotlinStdlib
+    // KotterKnife
+    compile 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
+    // RxAnimation
     compile project(":rxanimation-kotlin")
 }
 repositories {
