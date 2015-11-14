@@ -23,6 +23,7 @@
         android:textColor="@color/accent_text_color" />
 
     <RelativeLayout
+        android:id="@+id/main_layout_form"
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:layout_centerInParent="true"
@@ -35,7 +36,6 @@
         android:paddingTop="@dimen/element_spacing_xlarge">
 
         <LinearLayout
-            android:id="@+id/main_layout_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

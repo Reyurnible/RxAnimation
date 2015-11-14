@@ -4,31 +4,56 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.ScaleAnimation
+import android.widget.Button
+import android.widget.RelativeLayout
 import android.widget.TextView
+import butterknife.bindView
 import com.hosaka.rxanimation.animation.AnimationEvent
+import com.hosaka.rxanimation.animator.AnimatorEvent
 import com.hosaka.rxanimation_kotlin.animation.bindView
 import rx.Observable
 import rx.Subscriber
 
 class MainActivity : AppCompatActivity() {
 
+    val loginButton: Button by bindView(R.id.main_button_login)
+    val formLayout: RelativeLayout by bindView(R.id.main_layout_form)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        // initialize invisible
+        formLayout.visibility = View.INVISIBLE
 
-        val textView: TextView = findViewById(R.id.main_textview_hellow) as TextView
+        loginButton.setOnClickListener { startAnimations() }
+    }
 
-        val scaleAnimation = ScaleAnimation(0.0f, 1.0f, 1.0f, 1.0f)
-        scaleAnimation.duration = 1000
+    private fun startAnimations() {
+
+        val alphaAnimation: AlphaAnimation = AlphaAnimation(0.0f, 1.0f)
+        alphaAnimation.duration = 1200
+
         // Simple Use
-        scaleAnimation.bindView(textView).subscribe(object : Subscriber<AnimationEvent>() {
+        alphaAnimation.bindView(formLayout).subscribe(object : Subscriber<AnimationEvent>() {
             override fun onCompleted() {
 
             }
 
-            override fun onNext(t: AnimationEvent?) {
+            override fun onNext(t: AnimationEvent) {
+                when(t.kind()){
+                    AnimationEvent.Kind.START -> {
+                        formLayout.visibility = View.VISIBLE
+                    }
+                    AnimationEvent.Kind.REPEAT -> {
+
+                    }
+                    AnimationEvent.Kind.END -> {
+
+                    }
+                }
                 Log.d(MainActivity::class.java.simpleName, t.toString())
             }
 
@@ -46,11 +71,6 @@ class MainActivity : AppCompatActivity() {
             // post event
             textView.setTextColor(Color.RED)
         }*/
-
-
-
-
-        val alphaAnimation = AlphaAnimation(0.0f, 1.0f)
-        alphaAnimation.duration = 3000
     }
+
 }
