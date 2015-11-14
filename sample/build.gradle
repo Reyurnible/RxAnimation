@@ -1,13 +1,7 @@
 buildscript {
-    ext.kotlin_version = '1.0.0-beta-2422'
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
     dependencies {
         classpath rootProject.ext.androidPlugin
         classpath rootProject.ext.kotlinPlugin
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -42,7 +36,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile rootProject.ext.kotlinStdlib
     compile project(":rxanimation-kotlin")
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 repositories {
     mavenCentral()
