@@ -3,20 +3,27 @@ This is Animation wrapping Observable.
 You can get event Observable.
 And you can call animation chain more simple.
 
-## Offer
-- rx-animation
-- rx-animation-kotlin
+## Download
+Animation bindings:
 
-## Classes
+```
+```
+
+using Kotlin:
+
+```
+```
+
+## Public Classes
 - RxAnimation
-- AnimationEvent
-- AnimationEventOnSubscribe
+- RxAnimator
 
 ## Example
 
 ```Java
+TextView textView = (TextView) findViewById(R.id.textView);
 Animation animation = new ScaleAnimation(0.0f, 0.0f, 1.0f, 1.0f);
-RxAnimation.events(animation)
+RxAnimation.event(animation, textView)
     .subscribe(new Subscriber<AnimationEvent>() {
         @Override public void onCompleted() {
                
@@ -40,14 +47,15 @@ RxAnimation.events(animation)
 ```
 
 ```Kotlin
+val view: TextView = findViewById(R.id.textView) as TextView
 val animation: Animation = ScaleAnimation(0.0f, 0.0f, 1.0f, 1.0f)
-animation.events().subscribe(object : Subscriber<AnimationEvent>() {
+animation.bindView(view).subscribe(object : Subscriber<AnimationEvent>() {
     override fun onCompleted() {
         
     }
     
     override fun onNext(t: AnimationEvent?) {
-        when(t?.kind()) {
+        when(t!!.kind()) {
             AnimationEvent.Kind.START -> {
                 // START
             }
@@ -65,3 +73,6 @@ animation.events().subscribe(object : Subscriber<AnimationEvent>() {
     }
 })
 ```
+
+## Licences
+
