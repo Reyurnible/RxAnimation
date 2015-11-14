@@ -10,13 +10,13 @@ And you can call animation chain more simple.
 Animation bindings:
 
 ```
-Please wait soon...
+compile 'com.github.reyurnible.rxanimation.rxanimation:0.1.1'
 ```
 
 using Kotlin:
 
 ```
-Please wait soon...
+compile 'com.github.reyurnible.rxanimation.rxanimation-kotlin:0.1.1'
 ```
 
 ## Public Classes
