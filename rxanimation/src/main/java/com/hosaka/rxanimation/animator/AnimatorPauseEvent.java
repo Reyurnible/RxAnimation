@@ -21,7 +21,7 @@ public class AnimatorPauseEvent {
     private final Kind kind;
     private Animator animation;
 
-    public AnimatorPauseEvent(Animator animation, Kind kind) {
+    private AnimatorPauseEvent(Animator animation, Kind kind) {
         this.animation = animation;
         this.kind = kind;
     }

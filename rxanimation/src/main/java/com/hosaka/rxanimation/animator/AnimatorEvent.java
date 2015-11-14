@@ -21,7 +21,7 @@ public class AnimatorEvent {
     private final Kind kind;
     private Animator animation;
 
-    public AnimatorEvent(Animator animation, Kind kind) {
+    private AnimatorEvent(Animator animation, Kind kind) {
         this.animation = animation;
         this.kind = kind;
     }
