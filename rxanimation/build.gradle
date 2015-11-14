@@ -44,7 +44,7 @@ android {
 
 publish {
     userOrg = BINTRAY_USER
-    groupId = 'com.github.reyurnible.rxanimation'
+    groupId = 'com.github.reyurnible'
     uploadName = 'RxAnimation'
     artifactId = 'rxanimation'
     publishVersion = VERSION_NAME

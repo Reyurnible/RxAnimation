@@ -54,7 +54,7 @@ afterEvaluate{
 
 publish {
     userOrg = BINTRAY_USER
-    groupId = 'com.github.reyurnible.rxanimation-kotlin'
+    groupId = 'com.github.reyurnible'
     uploadName = 'RxAnimationKotlin'
     artifactId = 'rxanimation-kotlin'
     publishVersion = VERSION_NAME
