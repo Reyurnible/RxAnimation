@@ -10,13 +10,13 @@ And you can call animation chain more simple.
 Animation bindings:
 
 ```
-compile 'com.github.reyurnible.rxanimation.rxanimation:0.1.1'
+compile 'com.github.reyurnible.rxanimation:1.0.0'
 ```
 
 using Kotlin:
 
 ```
-compile 'com.github.reyurnible.rxanimation.rxanimation-kotlin:0.1.1'
+compile 'com.github.reyurnible.rxanimation-kotlin:1.0.0'
 ```
 
 ## Public Classes
