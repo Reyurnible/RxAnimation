@@ -1,5 +1,6 @@
-[![Kotlin Version](https://img.shields.io/maven-central/v/org.jetbrains.kotlin/kotlin-maven-plugin.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jetbrains.kotlin%22)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.0.0--beta--2422-blue.svg)](http://kotlinlang.org)
 [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/mplatvoet/kovenant/blob/master/LICENSE)
+[![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](http://kotlinslackin.herokuapp.com)
 
 # RxAnimation
 This is Animation wrapping Observable.
