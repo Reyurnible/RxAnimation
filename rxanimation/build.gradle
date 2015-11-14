@@ -43,10 +43,11 @@ android {
 }
 
 publish {
-    userOrg = USER_NAME
-    groupId = GORUP_ID
+    userOrg = BINTRAY_USER
+    groupId = 'com.github.reyurnible.rxanimation'
+    uploadName = 'RxAnimation'
     artifactId = 'rxanimation'
     publishVersion = VERSION_NAME
-    desc = 'Android animation observable binding.'
+    description = 'Android animation observable binding.'
     website = rootProject.ext.siteUrl
 }
