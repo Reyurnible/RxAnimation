@@ -1,3 +1,7 @@
+[![Download](https://api.bintray.com/packages/pawegio/maven/com.pawegio.kandroid%3Akandroid/images/download.svg) ](https://bintray.com/pawegio/maven/com.pawegio.kandroid%3Akandroid/_latestVersion)
+[![Kotlin Version](https://img.shields.io/maven-central/v/org.jetbrains.kotlin/kotlin-maven-plugin.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.jetbrains.kotlin%22)
+[![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/mplatvoet/kovenant/blob/master/LICENSE)
+
 # RxAnimation
 This is Animation wrapping Observable.
 You can get event Observable.
@@ -21,6 +25,8 @@ Please wait soon...
 - RxAnimator
 
 ## Example
+
+### Simple Usage
 
 ```Java
 TextView textView = (TextView) findViewById(R.id.textView);
@@ -74,6 +80,35 @@ animation.bindView(view).subscribe(object : Subscriber<AnimationEvent>() {
         
     }
 })
+```
+
+### Combine Usage
+ 
+```
+private fun startAnimations() {
+    val alphaAnimation: AlphaAnimation = AlphaAnimation(0.0f, 1.0f)
+    alphaAnimation.duration = 3000
+    val alphaAnimationObserver = alphaAnimation.bindView(formLayout).map {
+        Log.d(TAG, it.toString())
+        it.kind() == AnimationEvent.Kind.END
+    }
+
+    val translationAnimator: ObjectAnimator = ObjectAnimator.ofFloat(formLayout, "translationY", -1000f, 0f);
+    translationAnimator.setDuration(3000);
+    val translateAnimatorObserver = translationAnimator.events().map {
+        Log.d(TAG, it.toString())
+        it.kind() == AnimatorEvent.Kind.END
+    }
+
+    Observable.combineLatest(translateAnimatorObserver, alphaAnimationObserver, { t1, t2 ->
+        Log.d(TAG, "T1:" + t1.toString())
+        Log.d(TAG, "T2:" + t2.toString())
+        t1.and(t2)
+    }).filter { it }.subscribe { validate ->
+        // post event
+        Log.d(TAG, "End All Animation")
+    }
+}
 ```
 
 ## Licences
