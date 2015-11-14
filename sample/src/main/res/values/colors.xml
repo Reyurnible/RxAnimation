@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- Theme Colors -->
+    <color name="color_primary">#dcff8d</color>
+    <color name="color_primary_dark">#90c58f</color>
+    <color name="color_accent">#CDDC39</color>
+    <!-- Text Colors -->
+    <color name="primary_text_color">#212121</color>
+    <color name="primary_text_color_inverse">#FFFFFF</color>
+    <color name="accent_text_color">#778168</color>
+    <color name="accent_text_color_inverse">#C4C4C4</color>
+
+
 </resources>

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">sample</string>
+
+    <string name="main_button">Login</string>
+    <string name="main_hint_mail">MailAddress</string>
+    <string name="main_hint_pass">Password</string>
+    <string name="main_signup">SignUp</string>
+    <string name="main_forgot">Forgot Password?</string>
+
 </resources>
