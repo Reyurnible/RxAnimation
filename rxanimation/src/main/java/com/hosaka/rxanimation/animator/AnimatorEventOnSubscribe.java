@@ -1,6 +1,8 @@
 package com.hosaka.rxanimation.animator;
 
 import android.animation.Animator;
+import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.hosaka.rxanimation.internal.MainThreadSubscription;
 
@@ -15,7 +17,7 @@ import static com.hosaka.rxanimation.internal.Preconditions.checkUiThread;
 final class AnimatorEventOnSubscribe implements Observable.OnSubscribe<AnimatorEvent> {
     private final Animator animation;
 
-    AnimatorEventOnSubscribe(Animator animation) {
+    AnimatorEventOnSubscribe(@NonNull Animator animation) {
         this.animation = animation;
     }
 
