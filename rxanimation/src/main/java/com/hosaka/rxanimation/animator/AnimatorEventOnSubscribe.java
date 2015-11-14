@@ -34,6 +34,7 @@ final class AnimatorEventOnSubscribe implements Observable.OnSubscribe<AnimatorE
             @Override public void onAnimationEnd(Animator animation) {
                 if (!subscriber.isUnsubscribed()) {
                     subscriber.onNext(AnimatorEvent.create(animation, AnimatorEvent.Kind.END));
+                    subscriber.onCompleted();
                 }
             }
 
