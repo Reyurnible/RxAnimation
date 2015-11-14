@@ -7,11 +7,13 @@ And you can call animation chain more simple.
 Animation bindings:
 
 ```
+Please wait soon...
 ```
 
 using Kotlin:
 
 ```
+Please wait soon...
 ```
 
 ## Public Classes
