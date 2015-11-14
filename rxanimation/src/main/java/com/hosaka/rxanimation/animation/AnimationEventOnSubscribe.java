@@ -1,5 +1,6 @@
 package com.hosaka.rxanimation.animation;
 
+import android.view.View;
 import android.view.animation.Animation;
 
 import com.hosaka.rxanimation.internal.MainThreadSubscription;
@@ -14,9 +15,11 @@ import static com.hosaka.rxanimation.internal.Preconditions.checkUiThread;
  */
 final class AnimationEventOnSubscribe implements Observable.OnSubscribe<AnimationEvent> {
     private final Animation animation;
+    private final View view;
 
-    AnimationEventOnSubscribe(Animation animation) {
+    AnimationEventOnSubscribe(Animation animation, View view) {
         this.animation = animation;
+        this.view = view;
     }
 
     @Override public void call(final Subscriber<? super AnimationEvent> subscriber) {
@@ -42,6 +45,8 @@ final class AnimationEventOnSubscribe implements Observable.OnSubscribe<Animatio
             }
         };
         animation.setAnimationListener(listener);
+        // subscribeするタイミングはユーザーが決められるのでsetではなくstartにする
+        view.startAnimation(animation);
 
         subscriber.add(new MainThreadSubscription() {
             @Override protected void onUnSubscribe() {
