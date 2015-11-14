@@ -52,6 +52,8 @@ final class AnimatorEventOnSubscribe implements Observable.OnSubscribe<AnimatorE
         };
         animation.addListener(listener);
 
+        animation.start();
+
         subscriber.add(new MainThreadSubscription() {
             @Override
             protected void onUnSubscribe() {

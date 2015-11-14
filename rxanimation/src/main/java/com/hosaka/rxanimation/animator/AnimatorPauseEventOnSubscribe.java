@@ -40,6 +40,8 @@ public class AnimatorPauseEventOnSubscribe implements Observable.OnSubscribe<Ani
         };
         animation.addPauseListener(listener);
 
+        animation.start();
+
         subscriber.add(new MainThreadSubscription() {
             @Override
             protected void onUnSubscribe() {
