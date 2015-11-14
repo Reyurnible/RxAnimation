@@ -1,6 +1,7 @@
 subprojects {
     buildscript {
         repositories {
+            jcenter()
             mavenCentral()
         }
     }
@@ -12,7 +13,6 @@ subprojects {
     group = GROUP
     version = VERSION_NAME
 }
-
 
 allprojects {
     repositories {
@@ -39,4 +39,10 @@ ext {
 
     rxJava = 'io.reactivex:rxjava:1.0.14'
     rxAndroid = 'io.reactivex:rxandroid:1.0.1'
+
+    bintrayRelease = 'com.novoda:bintray-release:0.3.4'
+
+    siteUrl = 'https://github.com/Reyurnible/RxAnimation'
+    gitUrl = 'https://github.com/Reyurnible/RxAnimation.git'
+    issueTrackingUrl = 'https://github.com/Reyurnible/RxAnimation/issues'
 }

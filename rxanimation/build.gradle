@@ -1,13 +1,12 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
     dependencies {
         classpath rootProject.ext.androidPlugin
+        classpath rootProject.ext.bintrayRelease
     }
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
     compile rootProject.ext.rxJava
@@ -41,4 +40,13 @@ android {
     packagingOptions {
         exclude 'LICENSE.txt'
     }
+}
+
+publish {
+    userOrg = USER_NAME
+    groupId = GORUP_ID
+    artifactId = 'rxanimation'
+    publishVersion = VERSION_NAME
+    desc = 'Android animation observable binding.'
+    website = rootProject.ext.siteUrl
 }

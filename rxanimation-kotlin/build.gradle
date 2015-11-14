@@ -1,16 +1,14 @@
 buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
     dependencies {
         classpath rootProject.ext.androidPlugin
         classpath rootProject.ext.kotlinPlugin
+        classpath rootProject.ext.bintrayRelease
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
     compile project(':rxanimation')
@@ -49,6 +47,12 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 }
-repositories {
-    mavenCentral()
+
+publish {
+    userOrg = USER_NAME
+    groupId = GORUP_ID
+    artifactId = 'rxanimation-kotlin'
+    publishVersion = VERSION_NAME
+    desc = 'Android observable animation binding kotlin extention.'
+    website = rootProject.ext.siteUrl
 }
