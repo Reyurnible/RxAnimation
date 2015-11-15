@@ -11,21 +11,13 @@ And you can call animation chain more simple.
 Animation bindings:
 
 ```
-compile 'com.github.reyurnible:rxanimation:1.0.0'
+compile 'com.reyurnible.rxanimation:rxanimations:1.0.0'
 ```
 
 using Kotlin:
 
 ```
-compile 'com.github.reyurnible:rxanimation-kotlin:1.0.0'
-```
-
-```
-repositories {
-    maven {
-        url 'http://dl.bintray.com/reyurnible/maven'
-    }
-}
+compile 'com.reyurnible.rxanimation:rxanimations-kotlin:1.0.0'
 ```
 
 ## Public Classes
