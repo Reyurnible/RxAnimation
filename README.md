@@ -35,8 +35,9 @@ repositories {
 ## Example
 
 ### Simple Usage
+in Java
 
-```Java
+```
 TextView textView = (TextView) findViewById(R.id.textView);
 Animation animation = new ScaleAnimation(0.0f, 0.0f, 1.0f, 1.0f);
 RxAnimation.event(animation, textView)
@@ -62,7 +63,9 @@ RxAnimation.event(animation, textView)
     });
 ```
 
-```Kotlin
+in Kotlin
+
+```
 val view: TextView = findViewById(R.id.textView) as TextView
 val animation: Animation = ScaleAnimation(0.0f, 0.0f, 1.0f, 1.0f)
 animation.bindView(view).subscribe(object : Subscriber<AnimationEvent>() {
