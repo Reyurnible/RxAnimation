@@ -54,9 +54,9 @@ afterEvaluate{
 
 publish {
     userOrg = BINTRAY_USER
-    groupId = 'com.github.reyurnible'
-    uploadName = 'RxAnimationKotlin'
-    artifactId = 'rxanimation-kotlin'
+    groupId = GROUP_ID
+    uploadName = 'RxAnimationsKotlin'
+    artifactId = 'rxanimations-kotlin'
     publishVersion = VERSION_NAME
     description = 'Android observable animation binding kotlin extention.'
     website = rootProject.ext.siteUrl

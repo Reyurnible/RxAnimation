@@ -44,9 +44,9 @@ android {
 
 publish {
     userOrg = BINTRAY_USER
-    groupId = 'com.github.reyurnible'
-    uploadName = 'RxAnimation'
-    artifactId = 'rxanimation'
+    groupId = GROUP_ID
+    uploadName = 'RxAnimations'
+    artifactId = 'rxanimations'
     publishVersion = VERSION_NAME
     description = 'Android animation observable binding.'
     website = rootProject.ext.siteUrl
