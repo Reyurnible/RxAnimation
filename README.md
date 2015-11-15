@@ -20,6 +20,14 @@ using Kotlin:
 compile 'com.github.reyurnible.rxanimation-kotlin:1.0.0'
 ```
 
+```
+repositories {
+    maven {
+        url "http://dl.bintray.com/reyurnible/maven"
+    }
+}
+```
+
 ## Public Classes
 - RxAnimation
 - RxAnimator
