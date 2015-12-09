@@ -12,7 +12,6 @@ dependencies {
     compile rootProject.ext.rxJava
     compile rootProject.ext.supportAnnotations
 
-//    androidTestCompile project(':testing-utils')
     androidTestCompile rootProject.ext.supportTestRunner
     androidTestCompile rootProject.ext.supportTestRules
     androidTestCompile rootProject.ext.rxAndroid
@@ -58,4 +57,8 @@ publish {
     publishVersion = VERSION_NAME
     description = 'Android animation observable binding.'
     website = rootProject.ext.siteUrl
+}
+dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
 }
