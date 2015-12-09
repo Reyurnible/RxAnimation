@@ -1,4 +1,4 @@
-package com.jakewharton.rxbinding;
+package com.hosaka.rxanimation;
 
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -11,13 +11,13 @@ import static android.os.PowerManager.ACQUIRE_CAUSES_WAKEUP;
 import static android.os.PowerManager.FULL_WAKE_LOCK;
 import static android.os.PowerManager.ON_AFTER_RELEASE;
 
-public final class RxBindingTestRunner extends AndroidJUnitRunner {
+public final class RxAnimationTestRunner extends AndroidJUnitRunner {
   private PowerManager.WakeLock wakeLock;
 
   @Override public void onStart() {
     Context app = getTargetContext().getApplicationContext();
 
-    String name = RxBindingTestRunner.class.getSimpleName();
+    String name = RxAnimationTestRunner.class.getSimpleName();
     // Unlock the device so that the tests can input keystrokes.
     KeyguardManager keyguard = (KeyguardManager) app.getSystemService(KEYGUARD_SERVICE);
     keyguard.newKeyguardLock(name).disableKeyguard();

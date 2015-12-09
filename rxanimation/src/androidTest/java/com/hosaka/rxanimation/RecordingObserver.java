@@ -1,4 +1,4 @@
-package com.jakewharton.rxbinding;
+package com.hosaka.rxanimation;
 
 import android.util.Log;
 import java.util.NoSuchElementException;
