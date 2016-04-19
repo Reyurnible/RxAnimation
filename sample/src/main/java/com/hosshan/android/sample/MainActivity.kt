@@ -13,11 +13,15 @@ import android.widget.TextView
 import butterknife.bindView
 import com.hosaka.rxanimation.animation.AnimationEvent
 import com.hosaka.rxanimation.animator.AnimatorEvent
+import com.hosaka.rxanimation_kotlin.animation.bind
 import com.hosaka.rxanimation_kotlin.animation.bindView
-import com.hosaka.rxanimation_kotlin.animation.events
 import rx.Observable
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val TAG = "MainActivity"
+    }
 
     val loginButton: Button by bindView(R.id.main_button_login)
     val formLayout: RelativeLayout by bindView(R.id.main_layout_form)
@@ -44,24 +48,24 @@ class MainActivity : AppCompatActivity() {
         val alphaAnimation: AlphaAnimation = AlphaAnimation(0.0f, 1.0f)
         alphaAnimation.duration = 3000
         val alphaAnimationObserver = alphaAnimation.bindView(formLayout).map {
-            Log.d(MainActivity::class.java.simpleName, it.toString())
+            Log.d(TAG, it.toString())
             it.kind() == AnimationEvent.Kind.END
         }
 
-        val translationAnimator: ObjectAnimator = ObjectAnimator.ofFloat(formLayout, "translationY", -1000f, 0f);
-        translationAnimator.setDuration(3000);
-        val translateAnimatorObserver = translationAnimator.events().map {
-            Log.d(MainActivity::class.java.simpleName, it.toString())
+        val translationAnimator: ObjectAnimator = ObjectAnimator.ofFloat(formLayout, "translationY", -1000f, 0f)
+        translationAnimator.duration = 3000
+        val translateAnimatorObserver = translationAnimator.bind().map {
+            Log.d(TAG, it.toString())
             it.kind() == AnimatorEvent.Kind.END
         }
 
         Observable.combineLatest(translateAnimatorObserver, alphaAnimationObserver, { t1, t2 ->
-            Log.d(MainActivity::class.java.simpleName, "T1:" + t1.toString())
-            Log.d(MainActivity::class.java.simpleName, "T2:" + t2.toString())
+            Log.d(TAG, "T1:" + t1.toString())
+            Log.d(TAG, "T2:" + t2.toString())
             t1.and(t2)
         }).filter { it }.subscribe { validate ->
             // post event
-            Log.d(MainActivity::class.java.simpleName, "End All Animation")
+            Log.d(TAG, "End All Animation")
             mailEditText.visibility = View.VISIBLE
             passEditText.visibility = View.VISIBLE
             signupTextView.visibility = View.VISIBLE
