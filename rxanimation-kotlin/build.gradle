@@ -1,8 +1,13 @@
 buildscript {
+
     dependencies {
         classpath rootProject.ext.androidPlugin
         classpath rootProject.ext.kotlinPlugin
         classpath rootProject.ext.bintrayRelease
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$rootProject.ext.kotlinVersion"
+    }
+    repositories {
+        mavenCentral()
     }
 }
 
@@ -13,6 +18,7 @@ apply plugin: 'com.novoda.bintray-release'
 dependencies {
     compile project(':rxanimation')
     compile rootProject.ext.kotlinStdlib
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlinVersion"
 }
 
 android {
@@ -60,4 +66,7 @@ publish {
     publishVersion = VERSION_NAME
     description = 'Android observable animation binding kotlin extention.'
     website = rootProject.ext.siteUrl
+}
+repositories {
+    mavenCentral()
 }
