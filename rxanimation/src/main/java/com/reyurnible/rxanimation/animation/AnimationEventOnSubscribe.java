@@ -3,17 +3,16 @@ package com.reyurnible.rxanimation.animation;
 import android.view.View;
 import android.view.animation.Animation;
 
-import com.reyurnible.rxanimation.internal.MainThreadSubscription;
-
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Cancellable;
 
 import static com.reyurnible.rxanimation.internal.Preconditions.checkUiThread;
 
 /**
  * A animation event observer.
  */
-final class AnimationEventOnSubscribe implements Observable.OnSubscribe<AnimationEvent> {
+final class AnimationEventOnSubscribe implements ObservableOnSubscribe<AnimationEvent> {
     private final Animation animation;
     private final View view;
 
@@ -23,29 +22,29 @@ final class AnimationEventOnSubscribe implements Observable.OnSubscribe<Animatio
     }
 
     @Override
-    public void call(final Subscriber<? super AnimationEvent> subscriber) {
+    public void subscribe(final ObservableEmitter<AnimationEvent> emitter) throws Exception {
         checkUiThread();
 
         Animation.AnimationListener listener = new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                if (!subscriber.isUnsubscribed()) {
-                    subscriber.onNext(AnimationEvent.create(animation, AnimationEvent.Kind.START));
+                if (!emitter.isDisposed()) {
+                    emitter.onNext(AnimationEvent.create(animation, AnimationEvent.Kind.START));
                 }
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                if (!subscriber.isUnsubscribed()) {
-                    subscriber.onNext(AnimationEvent.create(animation, AnimationEvent.Kind.END));
-                    subscriber.onCompleted();
+                if (!emitter.isDisposed()) {
+                    emitter.onNext(AnimationEvent.create(animation, AnimationEvent.Kind.END));
+                    emitter.onComplete();
                 }
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-                if (!subscriber.isUnsubscribed()) {
-                    subscriber.onNext(AnimationEvent.create(animation, AnimationEvent.Kind.REPEAT));
+                if (!emitter.isDisposed()) {
+                    emitter.onNext(AnimationEvent.create(animation, AnimationEvent.Kind.REPEAT));
                 }
             }
         };
@@ -54,13 +53,11 @@ final class AnimationEventOnSubscribe implements Observable.OnSubscribe<Animatio
         // subscribeするタイミングはユーザーが決められるのでsetではなくstartにする
         view.startAnimation(animation);
 
-        subscriber.add(new MainThreadSubscription() {
+        emitter.setCancellable(new Cancellable() {
             @Override
-            protected void onUnSubscribe() {
+            public void cancel() throws Exception {
                 animation.setAnimationListener(null);
             }
         });
     }
-
-
 }
