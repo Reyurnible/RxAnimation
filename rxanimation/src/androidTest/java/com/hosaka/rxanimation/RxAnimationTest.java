@@ -38,7 +38,7 @@ public final class RxAnimationTest {
 
     @Test
     public void events() throws InterruptedException {
-        RecordingObserver<Object> o = new RecordingObserver<>();
+        RecordingObserver<AnimationEvent> o = new RecordingObserver<>();
 
         final AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         alphaAnimation.setStartOffset(0);
@@ -48,9 +48,9 @@ public final class RxAnimationTest {
         {   // ロードが完了するまで待つ
             waitForLoadingFinished(500);
             // Stack Start event
-            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.START);
+            assertThat(o.takeNext().kind() == AnimationEvent.Kind.START);
             // Stack End event
-            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.END);
+            assertThat(o.takeNext().kind() == AnimationEvent.Kind.END);
         }
         // Checking complete
         {
@@ -63,7 +63,7 @@ public final class RxAnimationTest {
 
     @Test
     public void repeat() throws InterruptedException {
-        RecordingObserver<Object> o = new RecordingObserver<>();
+        RecordingObserver<AnimationEvent> o = new RecordingObserver<>();
 
         final AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         alphaAnimation.setStartOffset(0);
@@ -73,13 +73,13 @@ public final class RxAnimationTest {
         {   // ロードが完了するまで待つ
             waitForLoadingFinished(500);
             // Stack Start event
-            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.START);
+            assertThat(o.takeNext().kind() == AnimationEvent.Kind.START);
             // Stack Repeat event
-            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.REPEAT);
+            assertThat(o.takeNext().kind() == AnimationEvent.Kind.REPEAT);
             // One more repeat
-            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.REPEAT);
+            assertThat(o.takeNext().kind() == AnimationEvent.Kind.REPEAT);
             // Stack End event
-            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.END);
+            assertThat(o.takeNext().kind() == AnimationEvent.Kind.END);
         }
         // Checking complete
         {
