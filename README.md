@@ -1,4 +1,4 @@
-[![Kotlin](https://img.shields.io/badge/kotlin-1.0.1-blue.svg)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.0.-blue.svg)](http://kotlinlang.org)
 [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/mplatvoet/kovenant/blob/master/LICENSE)
 [![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](http://kotlinslackin.herokuapp.com)
 
@@ -11,13 +11,13 @@ And you can call animation chain more simple.
 Animation bindings
 
 ```
-compile 'com.reyurnible.rxanimation:rxanimations:1.0.1'
+compile 'com.reyurnible.rxanimation:rxanimations:1.0.2'
 ```
 
 using Kotlin:
 
 ```
-compile 'com.reyurnible.rxanimation:rxanimations-kotlin:1.0.1'
+compile 'com.reyurnible.rxanimation:rxanimations-kotlin:1.0.2'
 ```
 
 ## Public Classes
