@@ -7,7 +7,7 @@ import android.os.Build;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Static factory methods for animator event observable.

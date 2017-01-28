@@ -1,13 +1,11 @@
 package com.reyurnible.rxanimation.animation;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableOnSubscribe;
-
-import android.animation.ObjectAnimator;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.animation.Animation;
+
+import io.reactivex.Observable;
 
 /**
  * Static factory methods for animation event observable.

@@ -3,17 +3,16 @@ package com.reyurnible.rxanimation.animator;
 import android.animation.ValueAnimator;
 import android.support.annotation.NonNull;
 
-import com.reyurnible.rxanimation.internal.MainThreadSubscription;
-
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Cancellable;
 
 import static com.reyurnible.rxanimation.internal.Preconditions.checkUiThread;
 
 /**
  * A animation update event observer.
  */
-final class AnimatorUpdateEventOnSubscribe implements Observable.OnSubscribe<AnimatorUpdateEvent> {
+final class AnimatorUpdateEventOnSubscribe implements ObservableOnSubscribe<AnimatorUpdateEvent> {
     private final ValueAnimator animation;
 
     AnimatorUpdateEventOnSubscribe(@NonNull ValueAnimator animation) {
@@ -21,23 +20,23 @@ final class AnimatorUpdateEventOnSubscribe implements Observable.OnSubscribe<Ani
     }
 
     @Override
-    public void call(final Subscriber<? super AnimatorUpdateEvent> subscriber) {
+    public void subscribe(final ObservableEmitter<AnimatorUpdateEvent> emitter) throws Exception {
         checkUiThread();
 
         final ValueAnimator.AnimatorUpdateListener listener = new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                if (!subscriber.isUnsubscribed()) {
-                    subscriber.onNext(AnimatorUpdateEvent.create(animation));
+                if (!emitter.isDisposed()) {
+                    emitter.onNext(AnimatorUpdateEvent.create(animation));
                 }
             }
         };
         animation.addUpdateListener(listener);
         animation.start();
 
-        subscriber.add(new MainThreadSubscription() {
+        emitter.setCancellable(new Cancellable() {
             @Override
-            protected void onUnSubscribe() {
+            public void cancel() throws Exception {
                 animation.removeUpdateListener(listener);
             }
         });
