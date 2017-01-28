@@ -1,4 +1,4 @@
-package com.hosaka.rxanimation.animator;
+package com.reyurnible.rxanimation.animator;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;

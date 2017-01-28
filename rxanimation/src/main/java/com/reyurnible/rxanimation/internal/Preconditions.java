@@ -1,4 +1,4 @@
-package com.hosaka.rxanimation.internal;
+package com.reyurnible.rxanimation.internal;
 
 import android.os.Looper;
 

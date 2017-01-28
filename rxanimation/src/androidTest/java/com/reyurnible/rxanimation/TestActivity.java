@@ -1,4 +1,4 @@
-package com.hosaka.rxanimation;
+package com.reyurnible.rxanimation;
 
 import android.app.Activity;
 import android.os.Bundle;

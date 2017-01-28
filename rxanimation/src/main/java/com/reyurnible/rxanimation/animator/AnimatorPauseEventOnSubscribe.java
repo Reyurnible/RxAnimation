@@ -1,15 +1,15 @@
-package com.hosaka.rxanimation.animator;
+package com.reyurnible.rxanimation.animator;
 
 import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.os.Build;
 
-import com.hosaka.rxanimation.internal.MainThreadSubscription;
+import com.reyurnible.rxanimation.internal.MainThreadSubscription;
 
 import rx.Observable;
 import rx.Subscriber;
 
-import static com.hosaka.rxanimation.internal.Preconditions.checkUiThread;
+import static com.reyurnible.rxanimation.internal.Preconditions.checkUiThread;
 
 /**
  * A animator pause event observer.

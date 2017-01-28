@@ -1,4 +1,4 @@
-package com.hosaka.rxanimation;
+package com.reyurnible.rxanimation;
 
 import android.app.Instrumentation;
 import android.os.SystemClock;
@@ -8,8 +8,8 @@ import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 
-import com.hosaka.rxanimation.animation.AnimationEvent;
-import com.hosaka.rxanimation.animation.RxAnimation;
+import com.reyurnible.rxanimation.animation.AnimationEvent;
+import com.reyurnible.rxanimation.animation.RxAnimation;
 
 import org.junit.Before;
 import org.junit.Rule;

@@ -17,7 +17,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.hosshan.android.sample"
+        applicationId "com.reyurnible.android.sample"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1

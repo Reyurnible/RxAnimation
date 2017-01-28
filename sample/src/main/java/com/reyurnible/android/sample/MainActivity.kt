@@ -11,9 +11,9 @@ import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
 import butterknife.bindView
-import com.hosaka.rxanimation.animation.AnimationEvent
-import com.hosaka.rxanimation.animator.AnimatorEvent
-import com.hosaka.rxanimation_kotlin.animation.events
+import com.reyurnible.rxanimation.animation.AnimationEvent
+import com.reyurnible.rxanimation.animator.AnimatorEvent
+import com.reyurnible.rxanimation_kotlin.animation.events
 import rx.Observable
 
 class MainActivity : AppCompatActivity() {

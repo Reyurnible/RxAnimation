@@ -1,27 +1,28 @@
-package com.hosaka.rxanimation.animator;
+package com.reyurnible.rxanimation.animator;
 
 import android.animation.Animator;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 /**
- * A android animator pause event occurred.
+ * A android animator event occurred.
  */
-public class AnimatorPauseEvent {
+public class AnimatorEvent {
 
     public enum Kind {
-        PAUSE, RESUME
+        START, END, CANCEL, REPEAT
     }
 
-    @CheckResult @NonNull
-    public static AnimatorPauseEvent create(@NonNull Animator animation, @NonNull Kind kind) {
-        return new AnimatorPauseEvent(animation, kind);
+    @CheckResult
+    @NonNull
+    public static AnimatorEvent create(@NonNull Animator animation, @NonNull Kind kind) {
+        return new AnimatorEvent(animation, kind);
     }
 
     private final Kind kind;
     private Animator animation;
 
-    private AnimatorPauseEvent(Animator animation, Kind kind) {
+    private AnimatorEvent(Animator animation, Kind kind) {
         this.animation = animation;
         this.kind = kind;
     }
@@ -36,23 +37,26 @@ public class AnimatorPauseEvent {
         return kind;
     }
 
-    @Override public boolean equals(Object object) {
+    @Override
+    public boolean equals(Object object) {
         if (object == this) return true;
-        if (!(object instanceof AnimatorPauseEvent)) return false;
-        AnimatorPauseEvent other = (AnimatorPauseEvent) object;
+        if (!(object instanceof AnimatorEvent)) return false;
+        AnimatorEvent other = (AnimatorEvent) object;
         return other.animation() == animation()
                 && other.kind() == kind();
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = 17;
         result = result * 37 + animation().hashCode();
         result = result * 37 + kind().hashCode();
         return result;
     }
 
-    @Override public String toString() {
-        return "AnimatorPauseEvent{animation="
+    @Override
+    public String toString() {
+        return "AnimatorEvent{animation="
                 + animation()
                 + ", kind="
                 + kind()

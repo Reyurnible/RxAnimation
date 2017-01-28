@@ -26,7 +26,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
 
-        testInstrumentationRunner 'com.hosaka.rxanimation.RxAnimationTestRunner'
+        testInstrumentationRunner 'com.reyurnible.rxanimation.RxAnimationTestRunner'
     }
 
     compileOptions {

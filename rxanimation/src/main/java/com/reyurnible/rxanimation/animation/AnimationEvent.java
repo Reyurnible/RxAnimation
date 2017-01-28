@@ -1,4 +1,4 @@
-package com.hosaka.rxanimation.animation;
+package com.reyurnible.rxanimation.animation;
 
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.hosaka.rxanimation;
+package com.reyurnible.rxanimation;
 
 import android.app.KeyguardManager;
 import android.content.Context;

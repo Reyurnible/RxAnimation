@@ -1,4 +1,4 @@
-package com.hosaka.rxanimation;
+package com.reyurnible.rxanimation;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -9,9 +9,9 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 
-import com.hosaka.rxanimation.animator.AnimatorEvent;
-import com.hosaka.rxanimation.animator.AnimatorUpdateEvent;
-import com.hosaka.rxanimation.animator.RxAnimator;
+import com.reyurnible.rxanimation.animator.AnimatorEvent;
+import com.reyurnible.rxanimation.animator.AnimatorUpdateEvent;
+import com.reyurnible.rxanimation.animator.RxAnimator;
 
 import org.junit.Before;
 import org.junit.Rule;

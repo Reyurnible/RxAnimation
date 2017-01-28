@@ -1,14 +1,14 @@
-package com.hosaka.rxanimation.animation;
+package com.reyurnible.rxanimation.animation;
 
 import android.view.View;
 import android.view.animation.Animation;
 
-import com.hosaka.rxanimation.internal.MainThreadSubscription;
+import com.reyurnible.rxanimation.internal.MainThreadSubscription;
 
 import rx.Observable;
 import rx.Subscriber;
 
-import static com.hosaka.rxanimation.internal.Preconditions.checkUiThread;
+import static com.reyurnible.rxanimation.internal.Preconditions.checkUiThread;
 
 /**
  * A animation event observer.
