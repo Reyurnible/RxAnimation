@@ -1,10 +1,9 @@
 package com.hosaka.rxanimation;
 
-import android.content.Context;
+import android.app.Instrumentation;
 import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.annotation.UiThreadTest;
-import android.support.test.rule.UiThreadTestRule;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -12,46 +11,52 @@ import android.view.animation.AlphaAnimation;
 import com.hosaka.rxanimation.animation.AnimationEvent;
 import com.hosaka.rxanimation.animation.RxAnimation;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static com.google.common.truth.Truth.assertThat;
 
-/**
- * Created by shunhosaka on 2015/12/08.
- */
 @RunWith(AndroidJUnit4.class)
 public final class RxAnimationTest {
-    @Rule public final UiThreadTestRule uiThread = new UiThreadTestRule();
+    @Rule
+    public final ActivityTestRule<TestActivity> activityRule =
+            new ActivityTestRule<>(TestActivity.class);
 
-    private final Context context = InstrumentationRegistry.getContext();
-    private final View view = new View(context);
+    private final Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+    private View child;
+
+    @Before
+    public void setUp() {
+        TestActivity activity = activityRule.getActivity();
+        child = activity.child;
+    }
 
     @Test
-    @UiThreadTest
-    public void cycle() throws InterruptedException {
+    public void events() throws InterruptedException {
         RecordingObserver<Object> o = new RecordingObserver<>();
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(1000 * 3);
 
-        Subscription subscription =  RxAnimation.events(alphaAnimation, view).subscribe(o);
-        o.assertNoMoreEvents();
+        final AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setStartOffset(0);
+        alphaAnimation.setDuration(100);
 
-        // checking Start
+        final Subscription subscription = RxAnimation.events(alphaAnimation, child).subscribeOn(AndroidSchedulers.mainThread()).subscribe(o);
         {   // ロードが完了するまで待つ
-            waitForLoadingFinished(1000);
-            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.START).isNull();
+            waitForLoadingFinished(500);
+            // Stack Start event
+            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.START);
+            // Stack End event
+            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.END);
         }
-        // checking end
+        // Checking complete
         {
             waitForLoadingFinished(4000);
             o.assertOnCompleted();
         }
-
         subscription.unsubscribe();
         o.assertNoMoreEvents();
     }
