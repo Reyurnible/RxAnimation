@@ -13,8 +13,7 @@ import android.widget.TextView
 import butterknife.bindView
 import com.hosaka.rxanimation.animation.AnimationEvent
 import com.hosaka.rxanimation.animator.AnimatorEvent
-import com.hosaka.rxanimation_kotlin.animation.bind
-import com.hosaka.rxanimation_kotlin.animation.bindView
+import com.hosaka.rxanimation_kotlin.animation.events
 import rx.Observable
 
 class MainActivity : AppCompatActivity() {
@@ -47,14 +46,14 @@ class MainActivity : AppCompatActivity() {
 
         val alphaAnimation: AlphaAnimation = AlphaAnimation(0.0f, 1.0f)
         alphaAnimation.duration = 3000
-        val alphaAnimationObserver = alphaAnimation.bindView(formLayout).map {
+        val alphaAnimationObserver = alphaAnimation.events(formLayout).map {
             Log.d(TAG, it.toString())
             it.kind() == AnimationEvent.Kind.END
         }
 
         val translationAnimator: ObjectAnimator = ObjectAnimator.ofFloat(formLayout, "translationY", -1000f, 0f)
         translationAnimator.duration = 3000
-        val translateAnimatorObserver = translationAnimator.bind().map {
+        val translateAnimatorObserver = translationAnimator.events().map {
             Log.d(TAG, it.toString())
             it.kind() == AnimatorEvent.Kind.END
         }
