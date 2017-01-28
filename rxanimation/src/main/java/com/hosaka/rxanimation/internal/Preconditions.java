@@ -3,7 +3,7 @@ package com.hosaka.rxanimation.internal;
 import android.os.Looper;
 
 /**
- * Created by shunhosaka on 15/10/08.
+ * Check condition static function.
  */
 public final class Preconditions {
     public static void checkArgument(boolean assertion, String message) {

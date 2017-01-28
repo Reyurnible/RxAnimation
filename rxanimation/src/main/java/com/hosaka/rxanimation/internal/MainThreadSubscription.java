@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import rx.Subscription;
 
 /**
- * Created by shunhosaka on 15/10/08.
+ * Checking main thread subscription helper.
  */
 public abstract class MainThreadSubscription implements Subscription, Runnable {
     private static final Handler mainThread = new Handler(Looper.getMainLooper());
@@ -20,11 +20,13 @@ public abstract class MainThreadSubscription implements Subscription, Runnable {
     private static final AtomicIntegerFieldUpdater<MainThreadSubscription> unsubscribedUpdater =
             AtomicIntegerFieldUpdater.newUpdater(MainThreadSubscription.class, "unsubscribed");
 
-    @Override public final boolean isUnsubscribed() {
+    @Override
+    public final boolean isUnsubscribed() {
         return unsubscribed != 0;
     }
 
-    @Override public final void unsubscribe() {
+    @Override
+    public final void unsubscribe() {
         if (unsubscribedUpdater.compareAndSet(this, 0, 1)) {
             if (Looper.getMainLooper() == Looper.myLooper()) {
                 onUnSubscribe();
@@ -34,7 +36,8 @@ public abstract class MainThreadSubscription implements Subscription, Runnable {
         }
     }
 
-    @Override public final void run() {
+    @Override
+    public final void run() {
         onUnSubscribe();
     }
 
