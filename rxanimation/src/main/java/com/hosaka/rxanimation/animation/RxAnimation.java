@@ -8,11 +8,15 @@ import android.view.animation.Animation;
 import rx.Observable;
 
 /**
- * Created by shunhosaka on 15/10/08.
+ * Static factory methods for animation event observable.
  */
 public final class RxAnimation {
 
-    @CheckResult @NonNull
+    /**
+     * Create an animation event observable.
+     */
+    @CheckResult
+    @NonNull
     public static Observable<AnimationEvent> events(@NonNull Animation animation, @NonNull View view) {
         return Observable.create(new AnimationEventOnSubscribe(animation, view));
     }

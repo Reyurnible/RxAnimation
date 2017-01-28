@@ -11,6 +11,12 @@ apply plugin: 'com.novoda.bintray-release'
 dependencies {
     compile rootProject.ext.rxJava
     compile rootProject.ext.supportAnnotations
+
+    androidTestCompile rootProject.ext.supportTestRunner
+    androidTestCompile rootProject.ext.supportTestRules
+    androidTestCompile rootProject.ext.rxAndroid
+    androidTestCompile rootProject.ext.truth
+    testCompile rootProject.ext.junit
 }
 
 android {
@@ -19,6 +25,8 @@ android {
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
+
+        testInstrumentationRunner 'com.hosaka.rxanimation.RxAnimationTestRunner'
     }
 
     compileOptions {
@@ -43,6 +51,11 @@ android {
 }
 
 publish {
+    // Bintray Properties
+    // Run Command ./gradlew clean build bintrayUpload -PdryRun=false
+    bintrayUser = BINTRAY_USER
+    bintrayKey = BINTRAY_API_KEY
+
     userOrg = BINTRAY_USER
     groupId = GROUP_ID
     uploadName = 'RxAnimations'

@@ -2,6 +2,10 @@ buildscript {
     dependencies {
         classpath rootProject.ext.androidPlugin
         classpath rootProject.ext.kotlinPlugin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$rootProject.ext.kotlinVersion"
+    }
+    repositories {
+        mavenCentral()
     }
 }
 
@@ -9,12 +13,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.hosshan.android.sample"
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -40,6 +44,7 @@ dependencies {
     compile 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
     // RxAnimation
     compile project(":rxanimation-kotlin")
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlinVersion"
 }
 repositories {
     mavenCentral()

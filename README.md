@@ -1,4 +1,4 @@
-[![Kotlin](https://img.shields.io/badge/kotlin-1.0.0--beta--2422-blue.svg)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.0.1-blue.svg)](http://kotlinlang.org)
 [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/mplatvoet/kovenant/blob/master/LICENSE)
 [![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](http://kotlinslackin.herokuapp.com)
 
@@ -8,16 +8,16 @@ You can get event Observable.
 And you can call animation chain more simple.
 
 ## Download
-Animation bindings:
+Animation bindings
 
 ```
-compile 'com.reyurnible.rxanimation:rxanimations:1.0.0'
+compile 'com.reyurnible.rxanimation:rxanimations:1.0.1'
 ```
 
 using Kotlin:
 
 ```
-compile 'com.reyurnible.rxanimation:rxanimations-kotlin:1.0.0'
+compile 'com.reyurnible.rxanimation:rxanimations-kotlin:1.0.1'
 ```
 
 ## Public Classes
@@ -32,7 +32,7 @@ in Java
 ```
 TextView textView = (TextView) findViewById(R.id.textView);
 Animation animation = new ScaleAnimation(0.0f, 0.0f, 1.0f, 1.0f);
-RxAnimation.event(animation, textView)
+RxAnimation.events(animation, textView)
     .subscribe(new Subscriber<AnimationEvent>() {
         @Override public void onCompleted() {
                
@@ -98,7 +98,7 @@ private fun startAnimations() {
 
     val translationAnimator: ObjectAnimator = ObjectAnimator.ofFloat(formLayout, "translationY", -1000f, 0f);
     translationAnimator.setDuration(3000);
-    val translateAnimatorObserver = translationAnimator.events().map {
+    val translateAnimatorObserver = translationAnimator.bind().map {
         Log.d(TAG, it.toString())
         it.kind() == AnimatorEvent.Kind.END
     }

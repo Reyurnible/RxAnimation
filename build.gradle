@@ -27,6 +27,7 @@ ext {
     compileSdkVersion = 23
     buildToolsVersion = '23.0.1'
 
+    kotlinVersion = '1.0.1-2'
     kotlinPlugin = 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.0-beta-2422'
     kotlinStdlib = 'org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-2422'
 
@@ -34,8 +35,15 @@ ext {
     supportV4 = 'com.android.support:support-v4:23.0.1'
     supportAppCompat = 'com.android.support:appcompat-v7:23.0.1'
 
-    rxJava = 'io.reactivex:rxjava:1.0.14'
-    rxAndroid = 'io.reactivex:rxandroid:1.0.1'
+    supportTestRunner = 'com.android.support.test:runner:0.4'
+    supportTestRules = 'com.android.support.test:rules:0.4'
+    supportTestEspresso = 'com.android.support.test.espresso:espresso-core:2.2.1'
+    supportTestEspressoContrib = 'com.android.support.test.espresso:espresso-contrib:2.2.1'
+    junit = 'junit:junit:4.12'
+    truth = 'com.google.truth:truth:0.27'
+
+    rxJava = 'io.reactivex:rxjava:1.2.5'
+    rxAndroid = 'io.reactivex:rxandroid:1.2.1'
 
     bintrayRelease = 'com.novoda:bintray-release:0.3.4'
 

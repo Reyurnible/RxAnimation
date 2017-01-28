@@ -5,7 +5,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 /**
- * Created by shunhosaka on 15/10/09.
+ * A android animator event occurred.
  */
 public class AnimatorEvent {
 
@@ -13,7 +13,8 @@ public class AnimatorEvent {
         START, END, CANCEL, REPEAT
     }
 
-    @CheckResult @NonNull
+    @CheckResult
+    @NonNull
     public static AnimatorEvent create(@NonNull Animator animation, @NonNull Kind kind) {
         return new AnimatorEvent(animation, kind);
     }
@@ -36,7 +37,8 @@ public class AnimatorEvent {
         return kind;
     }
 
-    @Override public boolean equals(Object object) {
+    @Override
+    public boolean equals(Object object) {
         if (object == this) return true;
         if (!(object instanceof AnimatorEvent)) return false;
         AnimatorEvent other = (AnimatorEvent) object;
@@ -44,14 +46,16 @@ public class AnimatorEvent {
                 && other.kind() == kind();
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = 17;
         result = result * 37 + animation().hashCode();
         result = result * 37 + kind().hashCode();
         return result;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "AnimatorEvent{animation="
                 + animation()
                 + ", kind="

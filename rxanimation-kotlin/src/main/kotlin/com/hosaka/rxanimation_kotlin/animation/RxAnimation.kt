@@ -6,4 +6,4 @@ import com.hosaka.rxanimation.animation.AnimationEvent
 import com.hosaka.rxanimation.animation.RxAnimation
 import rx.Observable
 
-public inline fun Animation.bindView(view: View): Observable<AnimationEvent> = RxAnimation.events(this, view)
+fun Animation.events(view: View): Observable<AnimationEvent> = RxAnimation.events(this, view)

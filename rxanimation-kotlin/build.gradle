@@ -3,6 +3,7 @@ buildscript {
         classpath rootProject.ext.androidPlugin
         classpath rootProject.ext.kotlinPlugin
         classpath rootProject.ext.bintrayRelease
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$rootProject.ext.kotlinVersion"
     }
 }
 
@@ -13,6 +14,7 @@ apply plugin: 'com.novoda.bintray-release'
 dependencies {
     compile project(':rxanimation')
     compile rootProject.ext.kotlinStdlib
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlinVersion"
 }
 
 android {
@@ -53,6 +55,11 @@ afterEvaluate{
 }
 
 publish {
+    // Bintray Properties
+    // Run Command ./gradlew clean build bintrayUpload -PdryRun=false
+    bintrayUser = BINTRAY_USER
+    bintrayKey = BINTRAY_API_KEY
+
     userOrg = BINTRAY_USER
     groupId = GROUP_ID
     uploadName = 'RxAnimationsKotlin'
