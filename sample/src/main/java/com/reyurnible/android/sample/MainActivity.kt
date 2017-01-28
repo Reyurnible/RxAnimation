@@ -1,4 +1,4 @@
-package com.hosshan.android.sample
+package com.reyurnible.android.sample
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
