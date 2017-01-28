@@ -5,7 +5,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 /**
- * Created by shunhosaka on 15/10/10.
+ * A android animator pause event occurred.
  */
 public class AnimatorPauseEvent {
 

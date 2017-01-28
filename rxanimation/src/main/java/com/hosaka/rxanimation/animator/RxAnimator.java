@@ -9,17 +9,19 @@ import android.support.annotation.NonNull;
 import rx.Observable;
 
 /**
- * Created by shunhosaka on 15/10/09.
+ * Static factory methods for animator event observable.
  */
 public final class RxAnimator {
 
-    @CheckResult @NonNull
+    @CheckResult
+    @NonNull
     public static Observable<AnimatorEvent> events(@NonNull Animator animation) {
         return Observable.create(new AnimatorEventOnSubscribe(animation));
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    @CheckResult @NonNull
+    @CheckResult
+    @NonNull
     public static Observable<AnimatorPauseEvent> pauseEvents(@NonNull Animator animation) {
         return Observable.create(new AnimatorPauseEventOnSubscribe(animation));
     }
