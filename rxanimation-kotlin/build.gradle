@@ -1,13 +1,9 @@
 buildscript {
-
     dependencies {
         classpath rootProject.ext.androidPlugin
         classpath rootProject.ext.kotlinPlugin
         classpath rootProject.ext.bintrayRelease
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$rootProject.ext.kotlinVersion"
-    }
-    repositories {
-        mavenCentral()
     }
 }
 
@@ -59,6 +55,11 @@ afterEvaluate{
 }
 
 publish {
+    // Bintray Properties
+    // Run Command ./gradlew clean build bintrayUpload -PdryRun=false
+    bintrayUser = BINTRAY_USER
+    bintrayKey = BINTRAY_API_KEY
+
     userOrg = BINTRAY_USER
     groupId = GROUP_ID
     uploadName = 'RxAnimationsKotlin'
@@ -66,7 +67,4 @@ publish {
     publishVersion = VERSION_NAME
     description = 'Android observable animation binding kotlin extention.'
     website = rootProject.ext.siteUrl
-}
-repositories {
-    mavenCentral()
 }
