@@ -42,8 +42,8 @@ ext {
     junit = 'junit:junit:4.12'
     truth = 'com.google.truth:truth:0.27'
 
-    rxJava = 'io.reactivex:rxjava:1.0.14'
-    rxAndroid = 'io.reactivex:rxandroid:1.0.1'
+    rxJava = 'io.reactivex:rxjava:1.2.5'
+    rxAndroid = 'io.reactivex:rxandroid:1.2.1'
 
     bintrayRelease = 'com.novoda:bintray-release:0.3.4'
 
