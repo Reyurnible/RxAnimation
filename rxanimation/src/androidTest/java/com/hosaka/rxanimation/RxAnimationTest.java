@@ -54,7 +54,36 @@ public final class RxAnimationTest {
         }
         // Checking complete
         {
-            waitForLoadingFinished(4000);
+            waitForLoadingFinished(2000);
+            o.assertOnCompleted();
+        }
+        subscription.unsubscribe();
+        o.assertNoMoreEvents();
+    }
+
+    @Test
+    public void repeat() throws InterruptedException {
+        RecordingObserver<Object> o = new RecordingObserver<>();
+
+        final AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setStartOffset(0);
+        alphaAnimation.setDuration(100);
+        alphaAnimation.setRepeatCount(2);
+        final Subscription subscription = RxAnimation.events(alphaAnimation, child).subscribeOn(AndroidSchedulers.mainThread()).subscribe(o);
+        {   // ロードが完了するまで待つ
+            waitForLoadingFinished(500);
+            // Stack Start event
+            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.START);
+            // Stack Repeat event
+            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.REPEAT);
+            // One more repeat
+            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.REPEAT);
+            // Stack End event
+            assertThat(((AnimationEvent) o.takeNext()).kind() == AnimationEvent.Kind.END);
+        }
+        // Checking complete
+        {
+            waitForLoadingFinished(2000);
             o.assertOnCompleted();
         }
         subscription.unsubscribe();
