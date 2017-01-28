@@ -11,7 +11,7 @@ import rx.Subscriber;
 import static com.hosaka.rxanimation.internal.Preconditions.checkUiThread;
 
 /**
- * Created by shunhosaka on 15/10/08.
+ * A animation event observer.
  */
 final class AnimationEventOnSubscribe implements Observable.OnSubscribe<AnimationEvent> {
     private final Animation animation;
