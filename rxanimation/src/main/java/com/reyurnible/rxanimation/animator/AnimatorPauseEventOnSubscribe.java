@@ -4,10 +4,9 @@ import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.os.Build;
 
-import com.reyurnible.rxanimation.internal.MainThreadSubscription;
-
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Cancellable;
 
 import static com.reyurnible.rxanimation.internal.Preconditions.checkUiThread;
 
@@ -15,7 +14,7 @@ import static com.reyurnible.rxanimation.internal.Preconditions.checkUiThread;
  * A animator pause event observer.
  */
 @TargetApi(Build.VERSION_CODES.KITKAT)
-public class AnimatorPauseEventOnSubscribe implements Observable.OnSubscribe<AnimatorPauseEvent> {
+public class AnimatorPauseEventOnSubscribe implements ObservableOnSubscribe<AnimatorPauseEvent> {
     private final Animator animation;
 
     AnimatorPauseEventOnSubscribe(Animator animation) {
@@ -23,21 +22,21 @@ public class AnimatorPauseEventOnSubscribe implements Observable.OnSubscribe<Ani
     }
 
     @Override
-    public void call(final Subscriber<? super AnimatorPauseEvent> subscriber) {
+    public void subscribe(final ObservableEmitter<AnimatorPauseEvent> emitter) throws Exception {
         checkUiThread();
 
         final Animator.AnimatorPauseListener listener = new Animator.AnimatorPauseListener() {
             @Override
             public void onAnimationPause(Animator animation) {
-                if (!subscriber.isUnsubscribed()) {
-                    subscriber.onNext(AnimatorPauseEvent.create(animation, AnimatorPauseEvent.Kind.PAUSE));
+                if (!emitter.isDisposed()) {
+                    emitter.onNext(AnimatorPauseEvent.create(animation, AnimatorPauseEvent.Kind.PAUSE));
                 }
             }
 
             @Override
             public void onAnimationResume(Animator animation) {
-                if (!subscriber.isUnsubscribed()) {
-                    subscriber.onNext(AnimatorPauseEvent.create(animation, AnimatorPauseEvent.Kind.RESUME));
+                if (!emitter.isDisposed()) {
+                    emitter.onNext(AnimatorPauseEvent.create(animation, AnimatorPauseEvent.Kind.RESUME));
                 }
             }
         };
@@ -45,9 +44,9 @@ public class AnimatorPauseEventOnSubscribe implements Observable.OnSubscribe<Ani
 
         animation.start();
 
-        subscriber.add(new MainThreadSubscription() {
+        emitter.setCancellable(new Cancellable() {
             @Override
-            protected void onUnSubscribe() {
+            public void cancel() throws Exception {
                 animation.removePauseListener(listener);
             }
         });

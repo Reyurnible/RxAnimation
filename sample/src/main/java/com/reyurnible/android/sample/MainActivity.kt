@@ -14,7 +14,8 @@ import butterknife.bindView
 import com.reyurnible.rxanimation.animation.AnimationEvent
 import com.reyurnible.rxanimation.animator.AnimatorEvent
 import com.reyurnible.rxanimation_kotlin.animation.events
-import rx.Observable
+import io.reactivex.Observable
+import io.reactivex.functions.BiFunction
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,18 +59,23 @@ class MainActivity : AppCompatActivity() {
             it.kind() == AnimatorEvent.Kind.END
         }
 
-        Observable.combineLatest(translateAnimatorObserver, alphaAnimationObserver, { t1, t2 ->
-            Log.d(TAG, "T1:" + t1.toString())
-            Log.d(TAG, "T2:" + t2.toString())
-            t1.and(t2)
-        }).filter { it }.subscribe { validate ->
-            // post event
-            Log.d(TAG, "End All Animation")
-            mailEditText.visibility = View.VISIBLE
-            passEditText.visibility = View.VISIBLE
-            signupTextView.visibility = View.VISIBLE
-            forgotTextView.visibility = View.VISIBLE
-        }
+        Observable.combineLatest(
+                translateAnimatorObserver,
+                alphaAnimationObserver,
+                BiFunction<Boolean, Boolean, Boolean> { t1, t2 ->
+                    Log.d(TAG, "T1:" + t1.toString())
+                    Log.d(TAG, "T2:" + t2.toString())
+                    t1.and(t2)
+                })
+                .filter { it }
+                .subscribe { validate ->
+                    // post event
+                    Log.d(TAG, "End All Animation")
+                    mailEditText.visibility = View.VISIBLE
+                    passEditText.visibility = View.VISIBLE
+                    signupTextView.visibility = View.VISIBLE
+                    forgotTextView.visibility = View.VISIBLE
+                }
     }
 
 }
