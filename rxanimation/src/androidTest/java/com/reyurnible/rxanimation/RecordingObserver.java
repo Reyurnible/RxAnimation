@@ -7,7 +7,9 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observer;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -17,7 +19,12 @@ public final class RecordingObserver<T> implements Observer<T> {
     private final BlockingDeque<Object> events = new LinkedBlockingDeque<>();
 
     @Override
-    public void onCompleted() {
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onComplete() {
         Log.v(TAG, "onCompleted");
         events.addLast(new OnCompleted());
     }

@@ -16,8 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -43,8 +42,7 @@ public final class RxAnimationTest {
         final AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         alphaAnimation.setStartOffset(0);
         alphaAnimation.setDuration(100);
-
-        final Subscription subscription = RxAnimation.events(alphaAnimation, child).subscribeOn(AndroidSchedulers.mainThread()).subscribe(o);
+        RxAnimation.events(alphaAnimation, child).subscribeOn(AndroidSchedulers.mainThread()).subscribe(o);
         {   // ロードが完了するまで待つ
             waitForLoadingFinished(500);
             // Stack Start event
@@ -57,7 +55,6 @@ public final class RxAnimationTest {
             waitForLoadingFinished(2000);
             o.assertOnCompleted();
         }
-        subscription.unsubscribe();
         o.assertNoMoreEvents();
     }
 
@@ -69,7 +66,7 @@ public final class RxAnimationTest {
         alphaAnimation.setStartOffset(0);
         alphaAnimation.setDuration(100);
         alphaAnimation.setRepeatCount(2);
-        final Subscription subscription = RxAnimation.events(alphaAnimation, child).subscribeOn(AndroidSchedulers.mainThread()).subscribe(o);
+        RxAnimation.events(alphaAnimation, child).subscribeOn(AndroidSchedulers.mainThread()).subscribe(o);
         {   // ロードが完了するまで待つ
             waitForLoadingFinished(500);
             // Stack Start event
@@ -86,7 +83,6 @@ public final class RxAnimationTest {
             waitForLoadingFinished(2000);
             o.assertOnCompleted();
         }
-        subscription.unsubscribe();
         o.assertNoMoreEvents();
     }
 

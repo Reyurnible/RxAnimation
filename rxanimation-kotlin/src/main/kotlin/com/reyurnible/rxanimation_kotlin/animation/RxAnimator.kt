@@ -6,7 +6,7 @@ import com.reyurnible.rxanimation.animator.AnimatorEvent
 import com.reyurnible.rxanimation.animator.AnimatorPauseEvent
 import com.reyurnible.rxanimation.animator.AnimatorUpdateEvent
 import com.reyurnible.rxanimation.animator.RxAnimator
-import rx.Observable
+import io.reactivex.Observable
 
 fun Animator.events(): Observable<AnimatorEvent> = RxAnimator.events(this)
 
