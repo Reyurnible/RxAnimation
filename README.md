@@ -7,17 +7,19 @@ This is Animation wrapping Observable.
 You can get event Observable.
 And you can call animation chain more simple.
 
+for 2.x.x is Using [RxJava2](https://github.com/ReactiveX/RxJava)
+
 ## Download
 Animation bindings
 
 ```
-compile 'com.reyurnible.rxanimation:rxanimations:1.0.2'
+compile 'com.reyurnible.rxanimation:rxanimations:2.0.0'
 ```
 
 using Kotlin:
 
 ```
-compile 'com.reyurnible.rxanimation:rxanimations-kotlin:1.0.2'
+compile 'com.reyurnible.rxanimation:rxanimations-kotlin:2.0.0'
 ```
 
 ## Public Classes
@@ -33,15 +35,7 @@ in Java
 TextView textView = (TextView) findViewById(R.id.textView);
 Animation animation = new ScaleAnimation(0.0f, 0.0f, 1.0f, 1.0f);
 RxAnimation.events(animation, textView)
-    .subscribe(new Subscriber<AnimationEvent>() {
-        @Override public void onCompleted() {
-               
-        }
-    
-        @Override public void onError(Throwable e) {
-            
-        }
-    
+    .subscribe {
         @Override public void onNext(AnimationEvent animationEvent) {
             switch (animationEvent.kind()) {
                 case START:
@@ -52,7 +46,7 @@ RxAnimation.events(animation, textView)
                     break;
             }
         }
-    });
+    };
 ```
 
 in Kotlin
@@ -60,29 +54,19 @@ in Kotlin
 ```
 val view: TextView = findViewById(R.id.textView) as TextView
 val animation: Animation = ScaleAnimation(0.0f, 0.0f, 1.0f, 1.0f)
-animation.bindView(view).subscribe(object : Subscriber<AnimationEvent>() {
-    override fun onCompleted() {
-        
-    }
-    
-    override fun onNext(t: AnimationEvent?) {
-        when(t!!.kind()) {
-            AnimationEvent.Kind.START -> {
-                // START
-            }
-            AnimationEvent.Kind.END -> {
-                // END
-            }
-            AnimationEvent.Kind.REPEAT -> {
-                // REPEAT
-            }
+animation.bindView(view).subscribe { t ->
+    when(t.kind()) {
+        AnimationEvent.Kind.START -> {
+            // START
+        }
+        AnimationEvent.Kind.END -> {
+            // END
+        }
+        AnimationEvent.Kind.REPEAT -> {
+            // REPEAT
         }
     }
-    
-    override fun onError(e: Throwable?) {
-        
-    }
-})
+}
 ```
 
 ### Combine Usage
@@ -102,15 +86,19 @@ private fun startAnimations() {
         Log.d(TAG, it.toString())
         it.kind() == AnimatorEvent.Kind.END
     }
-
-    Observable.combineLatest(translateAnimatorObserver, alphaAnimationObserver, { t1, t2 ->
-        Log.d(TAG, "T1:" + t1.toString())
-        Log.d(TAG, "T2:" + t2.toString())
-        t1.and(t2)
-    }).filter { it }.subscribe { validate ->
-        // post event
-        Log.d(TAG, "End All Animation")
-    }
+    Observable.combineLatest(
+                    translateAnimatorObserver,
+                    alphaAnimationObserver,
+                    BiFunction<Boolean, Boolean, Boolean> { t1, t2 ->
+                        Log.d(TAG, "T1:" + t1.toString())
+                        Log.d(TAG, "T2:" + t2.toString())
+                        t1.and(t2)
+                })
+                .filter { it }
+                .subscribe { validate ->
+                    // post event
+                    Log.d(TAG, "End All Animation")
+                }
 }
 ```
 
